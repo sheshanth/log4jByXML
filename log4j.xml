@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/"
+	debug="false">
+
+
+<appender name="fileInfo" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="D:/logs/Info.log" />
+    <param name="Append" value="true" />
+    <param name="ImmediateFlush" value="true" />
+    <param name="MaxFileSize" value="10MB" />
+    <param name="MaxBackupIndex" value="5" />
+
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d %d{Z} [%t] %-5p (%F:%L) - %m%n" />
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelMatchFilter">
+		<param name="LevelToMatch" value="INFO" />
+        <param name="AcceptOnMatch" value="true" />
+	</filter>
+	<filter class="org.apache.log4j.varia.DenyAllFilter"/>
+</appender>
+
+
+<appender name="fileError" class="org.apache.log4j.RollingFileAppender">
+    <param name="File" value="D:/logs/Error.log" />
+    <param name="Append" value="true" />
+    <param name="ImmediateFlush" value="true" />
+    <param name="MaxFileSize" value="10MB" />
+    <param name="MaxBackupIndex" value="5" />
+
+    <layout class="org.apache.log4j.PatternLayout">
+        <param name="ConversionPattern" value="%d %d{Z} [%t] %-5p (%F:%L) - %m%n" />
+    </layout>
+    <filter class="org.apache.log4j.varia.LevelMatchFilter">
+		<param name="LevelToMatch" value="ERROR" />
+        <param name="AcceptOnMatch" value="true" />
+	</filter>
+	<filter class="org.apache.log4j.varia.DenyAllFilter"/>
+</appender>
+
+
+<logger name="com.journaldev.log4j" additivity="false">
+	<level value="ALL" />
+	<appender-ref ref="fileInfo" />
+	<appender-ref ref="fileError" />
+</logger>
+
+<root>
+	<priority value="ALL" />
+	<appender-ref ref="fileInfo" />
+	<appender-ref ref="fileError" />
+</root>
+
+</log4j:configuration>
